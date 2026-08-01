@@ -1,0 +1,25 @@
+{
+  "name": "Mocho do Diabo MC — Painel Oficial",
+  "short_name": "Mocho do Diabo",
+  "description": "Tesouraria e calculadora de gasolina do Mocho do Diabo MC — Santa Cruz RN",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0b0908",
+  "theme_color": "#0b0908",
+  "icons": [
+    {
+      "src": "assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
