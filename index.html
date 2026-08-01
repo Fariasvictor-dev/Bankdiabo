@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mocho do Diabo MC — Santa Cruz RN</title>
+  <link rel="icon" href="assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Rye&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+  <div class="grain"></div>
+
+  <header class="site-header">
+    <div class="brand">
+      <img src="assets/logo.png" alt="Mocho do Diabo MC" class="brand-patch">
+      <div class="brand-text">
+        <span class="eyebrow">Motoclube</span>
+        <h1>Mocho do Diabo</h1>
+        <span class="brand-sub">Santa Cruz · RN</span>
+      </div>
+    </div>
+
+    <div id="auth-area" class="auth-area">
+      <input type="password" id="admin-pin" placeholder="Senha do tesoureiro">
+      <button class="btn btn-ghost" onclick="loginAdmin()">Entrar</button>
+      <span id="admin-badge" class="badge hidden">🔓 Tesoureiro</span>
+    </div>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab-btn active" data-tab="tesouraria" onclick="openTab('tesouraria', this)">
+      <span class="tab-mark">I</span> Tesouraria &amp; Caixa
+    </button>
+    <button class="tab-btn" data-tab="calculadora" onclick="openTab('calculadora', this)">
+      <span class="tab-mark">II</span> Calculadora de Gasolina
+    </button>
+  </nav>
+
+  <main>
+
+    <!-- ABA TESOURARIA -->
+    <section id="tesouraria" class="tab-content active">
+
+      <div class="saldo-patch">
+        <div class="saldo-diamond">
+          <span class="saldo-label">Saldo em Caixa</span>
+          <span id="total-caixa" class="saldo-valor">R$ 0,00</span>
+        </div>
+      </div>
+
+      <div class="grid-2col">
+
+        <div class="block">
+          <h2>Mensalidades dos Membros</h2>
+
+          <div class="admin-only hidden inline-form">
+            <input type="text" id="novo-membro" placeholder="Nome do novo membro">
+            <button class="btn" onclick="adicionarMembro()">Adicionar</button>
+          </div>
+
+          <ul id="lista-membros" class="item-list"></ul>
+        </div>
+
+        <div class="block">
+          <h2>Sangrias — Retiradas &amp; Despesas</h2>
+
+          <div class="admin-only hidden box-form">
+            <h3>Registrar nova sangria</h3>
+            <input type="text" id="sangria-desc" placeholder="Descrição — ex: conta de luz, churrasco">
+            <input type="number" id="sangria-valor" placeholder="Valor (R$)" step="0.01">
+            <label for="sangria-foto">Comprovante</label>
+            <input type="file" id="sangria-foto" accept="image/*">
+            <button class="btn" onclick="adicionarSangria()">Registrar sangria</button>
+          </div>
+
+          <ul id="lista-sangrias" class="item-list"></ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ABA CALCULADORA -->
+    <section id="calculadora" class="tab-content">
+      <h2>Quanto Vai Custar o Rolê</h2>
+      <p class="section-hint">Informe o preço do litro, a distância e o modelo — a estimativa sai pra pilotagem suave e pra intensa.</p>
+
+      <div class="box-form max-width-600">
+        <label for="preco-gasolina">Preço do litro (R$)</label>
+        <input type="number" id="preco-gasolina" placeholder="Ex: 5,89" step="0.01" value="5.89">
+
+        <label for="distancia-km">Distância do rolê (km)</label>
+        <input type="number" id="distancia-km" placeholder="Ex: 150">
+
+        <label for="moto-select">Sua moto</label>
+        <select id="moto-select" onchange="toggleCustomConsumo()">
+          <option value="40|30">Factor 150 / Titan 160 — suave ~40 km/l · intenso ~30 km/l</option>
+          <option value="35|25">300cc / Twister / Fazer 250 — suave ~35 km/l · intenso ~25 km/l</option>
+          <option value="22|15">600cc a 750cc — suave ~22 km/l · intenso ~15 km/l</option>
+          <option value="18|12">1000cc+ / Big Trail — suave ~18 km/l · intenso ~12 km/l</option>
+          <option value="custom">Outra — digitar consumo</option>
+        </select>
+
+        <div id="custom-consumo-box" class="hidden inline-form">
+          <input type="number" id="custom-suave" placeholder="km/l suave (ex: 38)">
+          <input type="number" id="custom-intenso" placeholder="km/l intenso (ex: 28)">
+        </div>
+
+        <button class="btn btn-block" onclick="calcularGasto()">Calcular estimativa</button>
+      </div>
+
+      <div id="resultado-calculo" class="resultado-box hidden">
+        <div class="resultado-linha suave">
+          <span class="resultado-tag">Suave</span>
+          <span class="resultado-desc">Passeio em comboio</span>
+          <span id="res-suave" class="resultado-valor"></span>
+        </div>
+        <div class="resultado-linha intenso">
+          <span class="resultado-tag">Intensa</span>
+          <span class="resultado-desc">Estrada, garupa e bagagem</span>
+          <span id="res-intenso" class="resultado-valor"></span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <span>Mocho do Diabo MC — Santa Cruz RN</span>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

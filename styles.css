@@ -1,0 +1,444 @@
+/* ==========================================================================
+   Mocho do Diabo MC — Painel Oficial
+   Token system: bone ink on void black, blood-red accent, patch-stitch motifs
+   ========================================================================== */
+
+:root {
+  --void:        #0b0908;
+  --surface:     #17130f;
+  --surface-2:   #201a15;
+  --line:        #3a3128;
+  --bone:        #ece6d8;
+  --bone-dim:    #b8ae9c;
+  --blood:       #a3221f;
+  --blood-bright:#c9302c;
+  --paid:        #4a7c59;
+  --rust:        #6b4423;
+
+  --font-display: 'Rye', serif;
+  --font-body: 'Oswald', sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { background: var(--void); }
+
+body {
+  font-family: var(--font-body);
+  background: var(--void);
+  color: var(--bone);
+  min-height: 100vh;
+  padding: 28px 24px 60px;
+  position: relative;
+  letter-spacing: 0.01em;
+}
+
+/* subtle film-grain / vignette so the black doesn't read flat */
+.grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse at 50% -10%, rgba(163,34,31,0.08), transparent 55%),
+    radial-gradient(ellipse at 50% 110%, rgba(0,0,0,0.6), transparent 60%);
+}
+
+header, nav, main, footer { position: relative; z-index: 1; }
+
+/* ---------- Header ---------- */
+
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding-bottom: 22px;
+  margin-bottom: 24px;
+  border-bottom: 1px dashed var(--line);
+}
+
+.brand { display: flex; align-items: center; gap: 16px; }
+
+.brand-patch {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--line);
+  box-shadow: 0 0 0 4px var(--void), 0 4px 14px rgba(0,0,0,0.6);
+}
+
+.brand-text { display: flex; flex-direction: column; line-height: 1.15; }
+
+.eyebrow {
+  font-size: 0.68rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--blood-bright);
+  font-weight: 600;
+}
+
+.brand-text h1 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.9rem;
+  color: var(--bone);
+  letter-spacing: 0.02em;
+  margin: 2px 0;
+}
+
+.brand-sub {
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--bone-dim);
+}
+
+.auth-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.auth-area input {
+  width: 190px;
+  margin: 0;
+}
+
+.badge {
+  background: var(--surface-2);
+  border: 1px solid var(--paid);
+  color: var(--paid);
+  padding: 8px 14px;
+  border-radius: 3px;
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* ---------- Tabs (rocker-patch style) ---------- */
+
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+
+.tab-btn {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  color: var(--bone-dim);
+  padding: 12px 22px;
+  cursor: pointer;
+  border-radius: 3px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.tab-mark {
+  font-family: var(--font-display);
+  color: var(--blood-bright);
+  font-size: 1rem;
+}
+
+.tab-btn:hover { border-color: var(--bone-dim); color: var(--bone); }
+
+.tab-btn.active {
+  background: var(--surface-2);
+  color: var(--bone);
+  border-color: var(--blood);
+  box-shadow: inset 0 0 0 1px var(--blood);
+}
+
+.tab-content { display: none; }
+.tab-content.active { display: block; animation: fade-in 0.25s ease; }
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Signature element: the saldo diamond patch ---------- */
+
+.saldo-patch {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0 40px;
+}
+
+.saldo-diamond {
+  width: 220px;
+  height: 220px;
+  transform: rotate(45deg);
+  border: 1px dashed var(--bone-dim);
+  outline: 1px solid var(--line);
+  outline-offset: 8px;
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-radius: 4px;
+}
+
+.saldo-label,
+.saldo-valor {
+  transform: rotate(-45deg);
+  text-align: center;
+}
+
+.saldo-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--bone-dim);
+}
+
+.saldo-valor {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  color: var(--blood-bright);
+}
+
+@media (max-width: 480px) {
+  .saldo-diamond { width: 170px; height: 170px; }
+  .saldo-valor { font-size: 1.4rem; }
+}
+
+/* ---------- Layout blocks ---------- */
+
+.grid-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+}
+
+@media (max-width: 780px) {
+  .grid-2col { grid-template-columns: 1fr; }
+}
+
+.block {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 22px;
+}
+
+.block h2, main > section > h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.15rem;
+  color: var(--bone);
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed var(--line);
+  letter-spacing: 0.02em;
+}
+
+.section-hint {
+  color: var(--bone-dim);
+  font-size: 0.85rem;
+  margin: -8px 0 18px;
+  max-width: 46ch;
+}
+
+/* ---------- Lists ---------- */
+
+.item-list { list-style: none; margin-top: 14px; display: flex; flex-direction: column; gap: 8px; }
+
+.item-list li {
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  padding: 12px 14px;
+  border-radius: 3px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.92rem;
+}
+
+.item-list li:empty { display: none; }
+
+/* ---------- Forms & inputs ---------- */
+
+label {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--bone-dim);
+  margin-bottom: 6px;
+}
+
+input, select, button {
+  font-family: var(--font-body);
+  padding: 11px 12px;
+  border-radius: 3px;
+  border: 1px solid var(--line);
+  background: var(--surface-2);
+  color: var(--bone);
+  width: 100%;
+  margin-bottom: 14px;
+  font-size: 0.92rem;
+}
+
+input::placeholder { color: #6e6456; }
+
+input:focus, select:focus, button:focus-visible {
+  outline: 2px solid var(--blood-bright);
+  outline-offset: 1px;
+  border-color: var(--blood-bright);
+}
+
+input[type="file"] { padding: 8px 10px; }
+
+.btn, button {
+  background: var(--blood);
+  color: var(--bone);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 0.82rem;
+  cursor: pointer;
+  border: 1px solid var(--blood);
+  width: auto;
+  transition: background 0.15s ease, transform 0.05s ease;
+}
+
+.btn:hover, button:hover { background: var(--blood-bright); }
+.btn:active, button:active { transform: translateY(1px); }
+
+.btn-block { width: 100%; margin-bottom: 0; }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--bone);
+  border: 1px solid var(--line);
+}
+.btn-ghost:hover { border-color: var(--bone-dim); background: var(--surface-2); }
+
+.inline-form { display: flex; gap: 10px; align-items: flex-start; }
+.inline-form input, .inline-form select { margin-bottom: 0; }
+.inline-form button { width: auto; white-space: nowrap; margin-bottom: 0; }
+
+.box-form {
+  background: var(--surface-2);
+  border: 1px dashed var(--line);
+  padding: 16px;
+  border-radius: 4px;
+  margin-bottom: 18px;
+}
+
+.box-form h3 {
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--bone-dim);
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.max-width-600 { max-width: 600px; }
+
+/* ---------- Status buttons / links ---------- */
+
+.btn-pago, .btn-pendente {
+  border: none;
+  padding: 7px 14px;
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  width: auto;
+  margin: 0;
+}
+.btn-pago { background: var(--paid); color: #eefaf1; }
+.btn-pendente { background: var(--blood); color: var(--bone); }
+
+.comprovante-link {
+  color: #c99a5b;
+  text-decoration: none;
+  border-bottom: 1px dotted #c99a5b;
+  font-size: 0.82rem;
+}
+.comprovante-link:hover { color: var(--bone); border-color: var(--bone); }
+
+/* ---------- Calculator result ---------- */
+
+.resultado-box {
+  margin-top: 20px;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.resultado-linha {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--line);
+  padding: 14px 16px;
+  border-radius: 3px;
+  flex-wrap: wrap;
+}
+
+.resultado-linha.suave { border-left-color: var(--paid); }
+.resultado-linha.intenso { border-left-color: var(--blood-bright); }
+
+.resultado-tag {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  min-width: 74px;
+}
+
+.resultado-linha.suave .resultado-tag { color: var(--paid); }
+.resultado-linha.intenso .resultado-tag { color: var(--blood-bright); }
+
+.resultado-desc {
+  color: var(--bone-dim);
+  font-size: 0.82rem;
+  flex: 1;
+}
+
+.resultado-valor {
+  font-weight: 600;
+  font-size: 0.98rem;
+}
+
+/* ---------- Utility ---------- */
+
+.hidden { display: none !important; }
+
+.site-footer {
+  margin-top: 50px;
+  text-align: center;
+  color: var(--bone-dim);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border-top: 1px dashed var(--line);
+  padding-top: 18px;
+}
+
+@media (max-width: 480px) {
+  body { padding: 18px 14px 40px; }
+  .brand-text h1 { font-size: 1.5rem; }
+}
