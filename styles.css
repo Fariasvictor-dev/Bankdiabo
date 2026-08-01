@@ -62,12 +62,10 @@ header, nav, main, footer { position: relative; z-index: 1; }
 .brand { display: flex; align-items: center; gap: 16px; }
 
 .brand-patch {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid var(--line);
-  box-shadow: 0 0 0 4px var(--void), 0 4px 14px rgba(0,0,0,0.6);
+  width: 68px;
+  height: 68px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.6));
 }
 
 .brand-text { display: flex; flex-direction: column; line-height: 1.15; }
