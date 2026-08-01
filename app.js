@@ -76,11 +76,23 @@ async function carregarMembros() {
     li.appendChild(nomeSpan);
 
     if (isAdmin) {
+      const acoes = document.createElement('div');
+      acoes.className = 'item-acoes';
+
       const btn = document.createElement('button');
       btn.className = m.pago ? 'btn-pago' : 'btn-pendente';
       btn.textContent = m.pago ? '✓ Pago' : '✗ Pendente';
       btn.onclick = () => togglePagamento(m.id, m.pago);
-      li.appendChild(btn);
+      acoes.appendChild(btn);
+
+      const btnRemover = document.createElement('button');
+      btnRemover.className = 'btn-remover';
+      btnRemover.textContent = '✕';
+      btnRemover.title = 'Remover membro';
+      btnRemover.onclick = () => removerMembro(m.id, m.nome);
+      acoes.appendChild(btnRemover);
+
+      li.appendChild(acoes);
     } else {
       const statusSpan = document.createElement('span');
       statusSpan.style.color = m.pago ? 'var(--paid)' : 'var(--blood-bright)';
@@ -159,6 +171,20 @@ function atualizarSaldo(valor) {
 async function togglePagamento(id, statusAtual) {
   if (!isAdmin) return;
   await db.from('membros').update({ pago: !statusAtual }).eq('id', id);
+  carregarMembros();
+}
+
+// ---------- Remover membro ----------
+async function removerMembro(id, nome) {
+  if (!isAdmin) return;
+  const confirmar = confirm(`Remover ${nome} da lista de membros?`);
+  if (!confirmar) return;
+
+  const { error } = await db.from('membros').delete().eq('id', id);
+  if (error) {
+    alert('Não foi possível remover o membro.');
+    return;
+  }
   carregarMembros();
 }
 

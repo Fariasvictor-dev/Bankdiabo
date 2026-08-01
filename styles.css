@@ -356,6 +356,12 @@ input[type="file"] { padding: 8px 10px; }
 
 /* ---------- Status buttons / links ---------- */
 
+.item-acoes {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .btn-pago, .btn-pendente {
   border: none;
   padding: 7px 14px;
@@ -369,6 +375,27 @@ input[type="file"] { padding: 8px 10px; }
 }
 .btn-pago { background: var(--paid); color: #eefaf1; }
 .btn-pendente { background: var(--blood); color: var(--bone); }
+
+.btn-remover {
+  background: transparent;
+  color: var(--bone-dim);
+  border: 1px solid var(--line);
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  margin: 0;
+  border-radius: 3px;
+  font-size: 0.85rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-remover:hover {
+  background: var(--blood);
+  color: var(--bone);
+  border-color: var(--blood);
+}
 
 .comprovante-link {
   color: #c99a5b;
